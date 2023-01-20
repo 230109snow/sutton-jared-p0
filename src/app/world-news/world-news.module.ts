@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FilterComponent } from './filter/filter.component';
 import { DisplayComponent } from './display/display.component';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { ApiCallService } from '../api-call.service';
 
 
 
@@ -14,6 +15,12 @@ import { NavbarComponent } from '../navbar/navbar.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    FilterComponent
+  ],
+  providers: [
+    ApiCallService
   ]
 })
 export class WorldNewsModule { }

@@ -1,8 +1,8 @@
 Jared Sutton's news aggregator project.
 
 # TODO
-- put interface for API call info (url, param string) in `api-call` service
-- implement `getAPI(url, paramstring)` in `api-call` service
+- ~~put interface for API call info (url, param string) in `api-call` service~~
+- ~~implement `getAPI(url, paramstring)` in `api-call` service~~
 - have `world-news/filter` contain a class parameter object `currentFilter`, which updates as a form is filled out
     - this form should validate inputs for: 
         - number (required, `>0`), 

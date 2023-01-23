@@ -15,7 +15,8 @@ import { ApiCallService } from '../api-call.service';
     CommonModule
   ],
   exports: [
-    FilterComponent
+    FilterComponent,
+    DisplayComponent
   ],
   providers: [
     ApiCallService

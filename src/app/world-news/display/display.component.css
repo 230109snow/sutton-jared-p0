@@ -1,0 +1,86 @@
+.app-container {
+  border: solid black 1px;
+  width: inherit;
+  margin: 0;
+  padding: 4px 0;
+  height: 400px;
+}
+
+/*
+///
+To display sidebar (news filter)
+///
+*/
+.app-left-sidebar-display {
+  display: inline-block;
+  border: solid red 1px;
+  width: 26%;
+  height: inherit;
+  margin-left: .5%;
+  position: absolute;
+}
+
+.app-left-sidebar-display > div {
+  display: flex;
+  position: relative;
+}
+
+.sidebar-title-div {
+  box-sizing: border-box;
+  width: 98%;
+  margin: 5px 0 5px 1%;
+  border: 1px solid green;
+  padding: 1%;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar-title-div p {
+  margin: 0;
+  padding: 0;
+  font-weight: bolder;
+  font-size: 14pt;
+}
+
+#filter-submit-btn-div {
+  border: dashed rgb(196, 184, 196) 1px;
+}
+#filter-submit-btn-div button {
+  margin: 0 auto;
+  display: block;
+}
+
+.sidebar-section-div {
+/*   border: dashed blueviolet 1px; */
+  display: block;
+  justify-content: center;
+}
+.ff-input-div-block {
+  border: dashed greenyellow 2px;
+  margin: 5px 0 2px 0;
+  padding: 0;
+}
+.ff-input-div {
+  border: dashed pink 1px;
+  margin: 5px 0 2px 0;
+  padding: 2px;
+}
+.ff-input-div-block>.ff-input-div {
+  margin: 0;
+  padding: 2px;
+}
+
+/*
+//////////////////////
+To display news stories:
+//////////////////////
+*/
+.app-main-content-display {
+  position: absolute;
+  left: 29%;
+  display: inline-block;
+  border: solid blue 1px;
+  width: 67.5%;
+  height: inherit;
+  margin-left: .5%;
+}

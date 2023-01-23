@@ -1,9 +1,65 @@
-<p>display works!</p>
+<br>
 <div class="app-container" id="worldnews-container">
-    <div class="app-left-sidebar" id="news-filter-div">
-
+  <div class="app-left-sidebar-display" id="filter-div">
+    <!--> FILTER SECTION TITLE: -->
+    <div class="sidebar-title-div" id="filter-title-div">
+      <p>Filter</p>
     </div>
-    <div class="app-main-content-display" id="news-display-div">
-
+    <!--> FILTER FORM: -->
+    <div class="sidebar-section-div" id="filter-form-div">
+      <form class="sidebar-form" id="filter-form">
+        <!--> FILTER SUBMIT BUTTON: -->
+        <div id="filter-submit-btn-div">
+          <button>Placeholder Submit</button>
+        </div>
+        <!--> FILTER INPUT: -->
+          <!--* Filter Form = 'ff' -->
+        <!--> Number of stories -->
+        <div class="ff-input-div" id="number-div">
+          <label class="ff-input-lbl" id="number-input-lbl" for="input-number">Number of stories</label>
+          <input type="number" class="ff-input int geq1 leq99" id="input-number" name="number-of-stories" formControlName="numberFC" placeholder="#">
+          <div class="invalid-input-msgdiv" id="invalid-number-msgdiv" *ngIf="filterFG.controls['numberFC'].invalid && filterFG.controls['numberFC'].touched">
+            <span style="color : red" *ngIf="filterFG.controls['numberFC'].errors?.['required']">Number required</span>
+            <span style="color : red" *ngIf="filterFG.controls['numberFC'].errors?.['max']">Maximum of 10 stories</span>
+            <span style="color : red" *ngIf="filterFG.controls['numberFC'].errors?.['min']">Minimum of 1 story</span>
+          </div>
+        </div>
+        <!--> Sentiment range -->
+        <div class="ff-input-div-block" id="sentiment-div-block">
+          <div class="ff-input-div" id="min-sentiment-div">
+            <label class="ff-input-lbl" id="min-sentiment-input-lbl" for="input-min-sentiment">Min</label>
+            <input type="number" class="ff-input float geq-1 leq1" id="input-min-sentiment" name="minimum sentiment" formControlName="min_sentimentFC" placeholder=":(">
+          </div>
+          <div class="ff-input-div" id="max-sentiment-div">
+            <label class="ff-input-lbl" id="max-sentiment-input-lbl" for="input-max-sentiment">Max</label>
+            <input type="number" class="ff-input float geq-1 leq1" id="input-max-sentiment" name="maximum sentiment" formControlName="max_sentimentFC" placeholder=":)">
+          </div>
+        </div>
+        <!--> Sort by & sort direction -->
+        <div class="ff-input-div-block" id="sorting-div-block">
+          <div class="ff-input-div" id="sort-div" name="sort by div"></div>
+          <div class="ff-input-div" id="sort-direction-div" name="sort direction div"></div>
+        </div>
+        <!--> Text -->
+        <div class="ff-input-div" id="text-div"></div>
+        <!--> Entity list -->
+        <div class="ff-input-div" id="entities-div"></div>
+        <!--> Author list -->
+        <div class="ff-input-div" id="authors-div"></div>
+        <!--> News source (url) list -->
+        <div class="ff-input-div" id="news-sources-div"></div>
+        <!--> Country (ISO 3166 codes) list & language-->
+        <div class="ff-input-div-block" id="country-lang-div-block">
+          <div class="ff-input-div" id="language-div"></div>
+          <div class="ff-input-div" id="source-countries-div"></div>
+        </div>
+        <!--> Earliest publish date (ISO String) -->
+        <div class="ff-input-div" id="earliest-publish-date-div"></div>
+      </form>
     </div>
+
+  </div>
+  <div class="app-main-content-display" id="display-div">
+
+  </div>
 </div>

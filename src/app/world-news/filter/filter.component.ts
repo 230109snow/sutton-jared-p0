@@ -13,6 +13,7 @@ export class FilterComponent {
   //TODO How can i let DisplayComponent interact with the filter values in this component?
   //@Output() filterUpdated = new EventEmitter<void>();
   //filterFG : FormGroup = new FormGroup({})
+  //TODO also maybe: add offset form input? could label it "Skip stories" or something?
 
   //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
   //> News filter parameters for World News API:

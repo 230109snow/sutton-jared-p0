@@ -3,7 +3,7 @@
   width: inherit;
   margin: 0;
   padding: 4px 0;
-  height: 400px;
+  height: 800px;
 }
 
 /*
@@ -69,7 +69,9 @@ To display sidebar (news filter)
   margin: 0;
   padding: 2px;
 }
-
+.radio-input-div>div {
+  display: inline-block;
+}
 /*
 //////////////////////
 To display news stories:

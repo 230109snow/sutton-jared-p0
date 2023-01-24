@@ -7,7 +7,7 @@
     </div>
     <!--> FILTER FORM: -->
     <div class="sidebar-section-div" id="filter-form-div">
-      <form class="sidebar-form" id="filter-form">
+      <form class="sidebar-form" id="filter-form" [formGroup]="filterFG">
         <!--> FILTER SUBMIT BUTTON: -->
         <div id="filter-submit-btn-div">
           <button>Placeholder Submit</button>
@@ -17,7 +17,7 @@
         <!--> Number of stories -->
         <div class="ff-input-div" id="number-div">
           <label class="ff-input-lbl" id="number-input-lbl" for="input-number">Number of stories</label>
-          <input type="number" class="ff-input int geq1 leq99" id="input-number" name="number-of-stories" formControlName="numberFC" placeholder="#">
+          <input type="number" class="ff-input int geq1 leq99" id="input-number" name="number-of-stories" formControlName="numberFC" placeholder="#" alt="The number of stories to display">
           <div class="invalid-input-msgdiv" id="invalid-number-msgdiv" *ngIf="filterFG.controls['numberFC'].invalid && filterFG.controls['numberFC'].touched">
             <span style="color : red" *ngIf="filterFG.controls['numberFC'].errors?.['required']">Number required</span>
             <span style="color : red" *ngIf="filterFG.controls['numberFC'].errors?.['max']">Maximum of 10 stories</span>
@@ -26,24 +26,68 @@
         </div>
         <!--> Sentiment range -->
         <div class="ff-input-div-block" id="sentiment-div-block">
+          <p class="ff-input-block-lbl" id="sentiment-block-lbl" style="margin: 0; display: block">Sentiment range: </p>
           <div class="ff-input-div" id="min-sentiment-div">
             <label class="ff-input-lbl" id="min-sentiment-input-lbl" for="input-min-sentiment">Min</label>
-            <input type="number" class="ff-input float geq-1 leq1" id="input-min-sentiment" name="minimum sentiment" formControlName="min_sentimentFC" placeholder=":(">
+            <input #minsentiment type="number" step="0.01" class="ff-input float geq-1 leq1" id="input-min-sentiment" name="minimum sentiment" formControlName="min_sentimentFC" placeholder=":(">
+            <div class="invalid-input-msgdiv" id="invalid-min-sentiment-msgdiv" *ngIf="filterFG.controls['min_sentimentFC'].invalid && filterFG.controls['min_sentimentFC'].touched">
+              <span style="color : red" *ngIf="filterFG.controls['min_sentimentFC'].errors?.['max']">Maximum sentiment = 1</span>
+              <span style="color : red" *ngIf="filterFG.controls['min_sentimentFC'].errors?.['min']">Minimum sentiment = -1</span>
+            </div>
           </div>
           <div class="ff-input-div" id="max-sentiment-div">
             <label class="ff-input-lbl" id="max-sentiment-input-lbl" for="input-max-sentiment">Max</label>
-            <input type="number" class="ff-input float geq-1 leq1" id="input-max-sentiment" name="maximum sentiment" formControlName="max_sentimentFC" placeholder=":)">
+            <input #maxsentiment type="number" step="0.01" class="ff-input float geq-1 leq1" id="input-max-sentiment" name="maximum sentiment" formControlName="max_sentimentFC" placeholder=":)">
+            <div class="invalid-input-msgdiv" id="invalid-max-sentiment-msgdiv" *ngIf="filterFG.controls['max_sentimentFC'].invalid && filterFG.controls['max_sentimentFC'].touched">
+              <span style="color : red" *ngIf="filterFG.controls['max_sentimentFC'].errors?.['max']">Maximum sentiment = 1</span>
+              <span style="color : red" *ngIf="filterFG.controls['max_sentimentFC'].errors?.['min']">Minimum sentiment = -1</span>
+            </div>
           </div>
+          <!--* This uses a custom validator for the form group to ensure min does not exceed max -->
+          <div class="invalid-input-msgdiv invalid-input-block-msgdiv" id="invalid-sentiment-block-msgdiv" *ngIf="filterFG.controls['min_sentimentFC'].touched && filterFG.controls['max_sentimentFC'].touched && filterFG.errors?.['minMaxMismatch']">
+            <span style="color : red" >Maximum sentiment should be greater than or equal to minimum sentiment!</span>
+          </div>
+        
         </div>
         <!--> Sort by & sort direction -->
         <div class="ff-input-div-block" id="sorting-div-block">
-          <div class="ff-input-div" id="sort-div" name="sort by div"></div>
-          <div class="ff-input-div" id="sort-direction-div" name="sort direction div"></div>
+          
+          <div class="ff-input-div radio-input-div" id="sort-direction-div" name="sort direction div">
+            <p class="ff-input-block-lbl" id="sorting-block-lbl" style="margin: 0; display: inline-block">Sort by:  </p>
+            <div >
+              <input type="radio" class="ff-input radio" id="sort-direction-asc-radio" name="sort direction" value="asc" checked>
+              <label class="ff-input-lbl radio-input-lbl" id="sort-direction-asc-input-lbl" for="sort-direction-asc-radio">asc</label>
+            </div>
+            <div>
+              <input type="radio" class="ff-input radio" id="sort-direction-dec-radio" name="sort direction" value="dec">
+              <label class="ff-input-lbl radio-input-lbl" id="sort-direction-asc-input-lbl" for="sort-direction-dec-radio">dec</label>
+            </div>
+          </div>
+          <div class="ff-input-div radio-input-div" id="sort-div" name="sort by div">
+            <div>
+              <input type="radio" class="ff-input radio" id="sort-publish-time-radio" name="sort by" value="publish-time" checked>
+              <label class="ff-input-lbl radio-input-lbl" id="sort-publish-time-input-lbl" for="sort-publish-time-radio">publish-time</label>
+            </div>
+            <div>
+              <input type="radio" class="ff-input radio" id="sort-sentiment-radio" name="sort by" value="sentiment">
+              <label class="ff-input-lbl radio-input-lbl" id="sort-sentiment-input-lbl" for="sort-sentiment-radio">sentiment</label>
+            </div>
+          </div>
+
         </div>
         <!--> Text -->
-        <div class="ff-input-div" id="text-div"></div>
+        <!-- TODO Left off here -->
+        <div class="ff-input-div" id="text-div">
+          <label class="ff-input-lbl" id="text-input-lbl" for="input-text">Text Search</label>
+          <input type="text" class="ff-input string" id="input-text" name="text search input" placeholder="Articles contain...">
+        </div>
         <!--> Entity list -->
-        <div class="ff-input-div" id="entities-div"></div>
+        <div class="ff-input-div" id="entities-div">
+          <input type="text" id="input-entities" formControlName="entitiesFC">
+        </div>
+        <div *ngIf="filterFG.controls['entitiesFC'].errors?.['invalidEntities'] && filterFG.controls['entitiesFC'].touched">
+          <span *ngIf="filterFG.controls['entitiesFC'].errors?.['invalidEntities']">No</span>
+        </div>
         <!--> Author list -->
         <div class="ff-input-div" id="authors-div"></div>
         <!--> News source (url) list -->

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FilterComponent } from './filter/filter.component';
 import { DisplayComponent } from './display/display.component';
 import { ApiCallService } from '../api-call.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,7 +13,8 @@ import { ApiCallService } from '../api-call.service';
     DisplayComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports: [
     FilterComponent,

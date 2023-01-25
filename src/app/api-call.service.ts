@@ -1,22 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { param, APICallFunc, apicallinfo } from 'src/models/api-call-info'
 
 //import { apilayer_key } from 'src/apiKeys';
-
-interface attributekey {
-  lbl: string;
-}
-interface param extends attributekey {
-  vals: Array<string | number>;
-}
-interface APICallFunc {
-  (calldat: apicallinfo): Observable<any>;
-}
-interface apicallinfo {
-  url : string;
-  options?: object;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +34,12 @@ export class ApiCallService {
   // note that the below paramstr doesnt include the initial "?"
   genParamStr(paramValarrPairs: Array<param>) : string {
     let resstr = ""
+    for(let parameter of paramValarrPairs) {
+      let p = parameter.lbl;
+      let q = parameter.vals;
+      let tst = q.every((e) => {return e==""})
+      console.log(p,q,tst);
+    }
     paramValarrPairs.forEach((p, i) => {
       const querystrcomponent = this.valarr_to_paramstr(p.vals);
       if(querystrcomponent) {
@@ -55,25 +48,13 @@ export class ApiCallService {
     })
     return resstr;
   }
-  /*eg
 
-    ParameterArray = [{
-        lbl : "key1",
-        vals : ["val1", "val2"]
-      },
-      {
-        lbl : "key2",
-        vals : [1, 7, 49]
-      }
-    ]
-  
-  */
   genAPICallInfo(apiurl : string, querystring : string | Array<param>, headerinfo?: object, payloadinfo?: object) : apicallinfo {
     let qstr : string;
     if(typeof(querystring)!="string" && querystring) {
       qstr = this.genParamStr(querystring);
     } else {qstr = querystring;}
-  
+
     let res = {
       url: `${apiurl}${qstr? "?" : ""}${qstr? qstr : ""}`
     }

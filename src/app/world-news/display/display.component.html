@@ -4,7 +4,14 @@
   <app-filter (filterSubmit)="GetWorldNews($event)"></app-filter>
 
   <div class="app-main-content-display" id="display-div">
-    <p>news stories</p>
+    <div *ngFor="let content of _main_content">
+      <div class="storydiv">
+        <h4 [innerText]="content.title"></h4>
+        <h6 [innerText]="'By : '+content.author"></h6>
+        <p [innerText]="content.summary? content.summary : content.text"></p>
+        <p>Source : <a [href]="content.url" [innerText]="getSourceFromURL(content.url)"></a></p>
+      </div>
+    </div>
   </div>
 
 </div>

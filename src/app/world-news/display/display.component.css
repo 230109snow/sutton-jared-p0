@@ -20,7 +20,13 @@ To display news stories:
   left: 31%;
   display: inline-block;
   border: solid blue 1px;
-  width: 67.5%;
+  width: 66%;
   height: inherit;
   margin-left: .5%;
+}
+
+.storydiv {
+  border: solid black 1px;
+  margin: 5px 1px;
+  padding: 4px;
 }

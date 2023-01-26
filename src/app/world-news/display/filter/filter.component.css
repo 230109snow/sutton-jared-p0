@@ -5,7 +5,7 @@ To display sidebar (news filter)
 */
 .app-filter-container {
   display: inline-block;
-  border: solid red 1px;
+  border: solid greenyellow 1px;
   width: 28%;
   height: inherit;
   margin-left: .5%;
@@ -37,7 +37,7 @@ To display sidebar (news filter)
 }
 
 #filter-submit-btn-div {
-  border: dashed rgb(196, 184, 196) 1px;
+/*   border: dashed rgb(196, 184, 196) 1px; */
   margin: 0 0 0 2%;
 }
 #filter-submit-btn-div button {
@@ -51,7 +51,7 @@ To display sidebar (news filter)
   justify-content: center;
 }
 .ff-input-div-block {
-  border: dashed greenyellow 2px;
+  border: dashed lightslategray 1px;
   margin: 5px 0 0 2%;
   padding: 0;
 }
@@ -60,7 +60,7 @@ To display sidebar (news filter)
   padding: 2%;
 }
 .ff-input-div {
-  border: dashed pink 1px;
+  border: dashed lightgrey 1px;
   margin: 5px 0 0 2%;
   padding: 2%;
 }

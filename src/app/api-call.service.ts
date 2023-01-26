@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { param, APICallFunc, apicallinfo } from 'src/models/api-call-info'
 import { apilayer_key } from 'src/apiKeys';

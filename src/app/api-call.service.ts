@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { param, APICallFunc, apicallinfo } from 'src/models/api-call-info'
+import { apilayer_key } from 'src/apiKeys';
 
-//import { apilayer_key } from 'src/apiKeys';
 
 @Injectable({
   providedIn: 'root'
@@ -31,47 +31,43 @@ export class ApiCallService {
     return encodeURIComponent(paramstr);
   }
 
-  // note that the below paramstr doesnt include the initial "?"
+  // note the below paramstr does NOT include the initial "?"
   genParamStr(paramValarrPairs: Array<param>) : string {
-    let resstr = ""
+    let resstr : string = "";
     for(let parameter of paramValarrPairs) {
       let p = parameter.lbl;
       let q = parameter.vals;
-      let tst = q.every((e) => {return e==""})
-      console.log(p,q,tst);
-    }
-    paramValarrPairs.forEach((p, i) => {
-      const querystrcomponent = this.valarr_to_paramstr(p.vals);
-      if(querystrcomponent) {
-        resstr+=`${resstr ? "&" : ""}${p.lbl}=${querystrcomponent}`;
+      if( !q.every((val) => {return val=="";}) ) {
+        resstr += `${resstr? "&" : ""}${p}=${this.valarr_to_paramstr(q)}`
       }
-    })
+    }
+    console.log("api-call service generated parameter string:");
+    console.log(resstr);
     return resstr;
   }
 
-  genAPICallInfo(apiurl : string, querystring : string | Array<param>, headerinfo?: object, payloadinfo?: object) : apicallinfo {
+  genAPICallInfo(apiurl : string, querystring : string | Array<param>) : apicallinfo {
+
     let qstr : string;
     if(typeof(querystring)!="string" && querystring) {
       qstr = this.genParamStr(querystring);
     } else {qstr = querystring;}
-
-    let res = {
+    let res : apicallinfo = {
       url: `${apiurl}${qstr? "?" : ""}${qstr? qstr : ""}`
     }
-    let optarg : object = {};
-    if(headerinfo || payloadinfo) {
-      if(headerinfo) {
-        Object.defineProperty(optarg, "headers", headerinfo);
-      }
-      if(payloadinfo) {
-        Object.defineProperty(optarg, "payload", payloadinfo);
-      }
-    }
-    if(optarg) {Object.defineProperty(res, "options", optarg);}
 
+    if(apiurl.includes('https://api.apilayer.com/')) {
+      const h = new HttpHeaders()
+        .append('apikey', apilayer_key)
+      res['options'] = { 'headers': h }
+    }
+    //console.log(res);
     return res
   }
-
+  getAPIx = (info : apicallinfo) => {
+    console.log(`url = ${info.url}`);
+    console.log(`opt = ${info.options}`);
+  }
   getAPI : APICallFunc = (info : apicallinfo) => {
     return this.http.get(info.url, info.options? info.options : {});
   }

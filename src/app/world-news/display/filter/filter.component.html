@@ -87,7 +87,7 @@
         <label class="ff-input-lbl" id="entities-input-lbl" for="input-entities">Entity List </label>
         <input type="text" class="ff-input string comma-sep-lst" id="input-entities" name="entity list input" formControlName="entitiesFC" placeholder="TYPE:NAME, ..." title="Enter a comma seperated list of entities. Valid entity types: ['PER', 'LOC', 'ORG', 'DATE', 'TIME', 'MONEY', 'PERCENT', 'FAC', 'GPE']">
         <div class="invalid-input-msgdiv" id="invalid-entities-msgdiv" *ngIf="filterFG.controls['entitiesFC'].errors?.['invalidEntities'] && filterFG.controls['entitiesFC'].touched">
-          <span *ngIf="filterFG.controls['entitiesFC'].errors?.['invalidEntities']">Invalid format. Please enter a comma seperated entity list of format 'TYPE:NAME', e.g. 'ORG:Tesla'</span>
+          <span style="color : red" *ngIf="filterFG.controls['entitiesFC'].errors?.['invalidEntities']">Invalid format. Please enter a comma seperated entity list of format 'TYPE:NAME', e.g. 'ORG:Tesla'</span>
         </div>
       </div>
       <!--> Author list -->

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiCallService } from '../../api-call.service';
-import { param } from 'src/models/api-call-info'
+import { param, apicallinfo } from 'src/models/api-call-info';
 
 @Component({
   selector: 'app-display',
@@ -10,15 +10,16 @@ import { param } from 'src/models/api-call-info'
 export class DisplayComponent {
 
   constructor (private apicall : ApiCallService) {}
-  //TODO - change event in display.component.html to actually do API call
-  go(arr : Array<param>) {
-    console.log(arr);
-    console.log(this.apicall.genAPICallInfo("https://api.apilayer.com/world_news/search-news", this.apicall.genParamStr(arr)));
+
+  GetWorldNews(paramArr : Array<param>) {
+    const apiUrl : string = "https://api.apilayer.com/world_news/search-news";
+    const qStr : string = this.apicall.genParamStr(paramArr);
+    const args : apicallinfo = this.apicall.genAPICallInfo(apiUrl, qStr);
+    this.apicall.getAPI(args).subscribe((dat) => {
+
+      //TODO - DO STUFF WITH RESPONSE
+      console.log(dat);
+    });
   }
 
-  /* getWorldNews() {
-    const args : apicallinfo = apicall.genAPICallInfo("https://api.apilayer.com/world_news/search-news", apicall.genParamStr(<filter info>));
-    apicall.getAPI(args);
-  }
-  */
 }

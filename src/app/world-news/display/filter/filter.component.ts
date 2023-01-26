@@ -50,9 +50,9 @@ export class FilterComponent implements OnInit{
   submitFilterForm() : void {
     if(this.filterFG.invalid) {console.log(this.filterFG.errors); return;}
     const fg = this.filterFG.getRawValue()
-    console.log("FilterFG = ", fg);
 
     const lbls = ["number", "min-sentiment", "max-sentiment", "text", "entities", "authors", "news-sources", "language", "source-countries", "earliest-publish-date"]//, "offset", "latest-publish-date"]
+
     // need to initialize these first because they're radio buttons:
     let fgarray : Array<param> = [
       {lbl: "sort", vals: [this._sort]},
@@ -63,7 +63,6 @@ export class FilterComponent implements OnInit{
       let paramvals : Array<string | number> = (typeof(fg[fc])=="string") ? fg[fc].split(',').map((x : string) => x.trim()) : [fg[fc]];
       fgarray.push({lbl: p, vals: paramvals})
     }
-    console.log(fgarray);
     this.filterSubmit.emit(fgarray);
   }
 
@@ -92,6 +91,7 @@ export class FilterComponent implements OnInit{
 
     for(let untrimmedval of valArray) {
       let val = untrimmedval.trim();
+      if(val=="") {continue;} // allows leading/trailing/duplicate commas
 
       let isValidFmt = ENTITY_REGEXP.test(val);
 
@@ -130,7 +130,6 @@ export class FilterComponent implements OnInit{
     languageFC: new FormControl(this._language, []),
     source_countriesFC: new FormControl('', []),
     earliest_publish_dateFC: new FormControl(this._earliest_publish_date, [])
-    //
   }, { validators: this.minMaxOrderValidator });
 
   //SECTION - Misc Functions:
